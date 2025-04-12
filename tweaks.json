@@ -1,23 +1,26 @@
 [
   {
-    "category": "Essential Tweaks",
+    "category": "Windows Store Fixes",
     "tweaks": [
       {
-        "label": "Enable Microsoft Store",
-        "command": "reg add \"HKLM\\Software\\Policies\\Microsoft\\WindowsStore\" /v RemoveWindowsStore /t REG_DWORD /d 0 /f"
+        "title": "Re-enable Microsoft Store",
+        "description": "Fixes broken Store by re-registering.",
+        "command": "powershell -Command \"Get-AppxPackage *WindowsStore* | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register '$($_.InstallLocation)\\AppXManifest.xml'}\""
       },
       {
-        "label": "Disable Telemetry",
-        "command": "Get-Service DiagTrack | Stop-Service"
+        "title": "Reset Microsoft Store",
+        "description": "Runs wsreset.exe to clear Store cache.",
+        "command": "wsreset.exe"
       }
     ]
   },
   {
-    "category": "Awawa Tweaks",
+    "category": "Explorer Tweaks",
     "tweaks": [
       {
-        "label": "Disable Cortana",
-        "command": "reg add \"HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Search\" /v AllowCortana /t REG_DWORD /d 0 /f"
+        "title": "Show File Extensions",
+        "description": "Reveals extensions for known file types.",
+        "command": "reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced /v HideFileExt /t REG_DWORD /d 0 /f"
       }
     ]
   }
