@@ -1,0 +1,24 @@
+[
+  {
+    "category": "Essential Tweaks",
+    "tweaks": [
+      {
+        "label": "Enable Microsoft Store",
+        "command": "reg add \"HKLM\\Software\\Policies\\Microsoft\\WindowsStore\" /v RemoveWindowsStore /t REG_DWORD /d 0 /f"
+      },
+      {
+        "label": "Disable Telemetry",
+        "command": "Get-Service DiagTrack | Stop-Service"
+      }
+    ]
+  },
+  {
+    "category": "Performance Tweaks",
+    "tweaks": [
+      {
+        "label": "Disable Cortana",
+        "command": "reg add \"HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Search\" /v AllowCortana /t REG_DWORD /d 0 /f"
+      }
+    ]
+  }
+]
