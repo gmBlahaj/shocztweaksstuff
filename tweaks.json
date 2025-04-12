@@ -1,27 +1,36 @@
-[
-  {
-    "category": "Windows Store Fixes",
-    "tweaks": [
-      {
-        "title": "Re-enable Microsoft Store",
-        "description": "Fixes broken Store by re-registering.",
-        "command": "powershell -Command \"Get-AppxPackage *WindowsStore* | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register '$($_.InstallLocation)\\AppXManifest.xml'}\""
-      },
-      {
-        "title": "Reset Microsoft Store",
-        "description": "Runs wsreset.exe to clear Store cache.",
-        "command": "wsreset.exe"
-      }
-    ]
-  },
-  {
-    "category": "Explorer Tweaks",
-    "tweaks": [
-      {
-        "title": "Show File Extensions",
-        "description": "Reveals extensions for known file types.",
-        "command": "reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced /v HideFileExt /t REG_DWORD /d 0 /f"
-      }
-    ]
-  }
-]
+{
+  "tweaks": [
+    {
+      "title": "Re-enable Microsoft Store",
+      "description": "Restores access to the Microsoft Store if it was disabled.",
+      "command": "powershell -Command \"Get-AppxPackage -allusers Microsoft.WindowsStore | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register '$($_.InstallLocation)\\AppXManifest.xml'}\""
+    },
+    {
+      "title": "Clear Temp Files",
+      "description": "Deletes all temporary files to free up space.",
+      "command": "cmd /c del /q/f/s %TEMP%\\*"
+    },
+    {
+      "title": "Disable Cortana",
+      "description": "Turns off Cortana via registry.",
+      "command": "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\" /v AllowCortana /t REG_DWORD /d 0 /f"
+    }
+  ],
+  "categories": [
+    {
+      "title": "Privacy Tweaks",
+      "items": [
+        {
+          "title": "Disable Telemetry",
+          "description": "Stops Windows from sending telemetry data.",
+          "command": "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection\" /v AllowTelemetry /t REG_DWORD /d 0 /f"
+        },
+        {
+          "title": "Disable Advertising ID",
+          "description": "Prevents apps from using your advertising ID.",
+          "command": "reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\AdvertisingInfo\" /v Enabled /t REG_DWORD /d 0 /f"
+        }
+      ]
+    }
+  ]
+}
